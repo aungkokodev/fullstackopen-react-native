@@ -5,7 +5,7 @@ import Main from './src/components/Main'
 export default function App() {
   return (
     <>
-      <StatusBar style='auto' />
+      <StatusBar style='light' />
       <NativeRouter>
         <Main />
       </NativeRouter>
