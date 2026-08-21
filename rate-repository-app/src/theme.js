@@ -2,7 +2,8 @@ const theme = {
   colors: {
     primary: '#0366d6',
     secondary: '#24292e',
-    muted: '#f6f8fa'
+    muted: '#f6f8fa',
+    error: '#d73a4a'
   },
   backgrounds: {
     primary: '#ffffff',
