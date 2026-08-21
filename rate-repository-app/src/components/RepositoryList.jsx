@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, View } from 'react-native'
+import theme from '../theme'
 import RepositoryItem from './RepositoryItem'
 
 const repositories = [
@@ -50,7 +51,7 @@ const repositories = [
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10
+    height: theme.sizes.md
   }
 })
 

@@ -6,11 +6,12 @@ const theme = {
   },
   backgrounds: {
     primary: '#ffffff',
-    secondary: '#24292e'
+    secondary: '#24292e',
+    main: '#e1e4e8'
   },
   textColors: {
     primary: '#24292e',
-    secondary: '#586069',
+    secondary: '#afb7c2',
     inverse: '#ffffff'
   },
   fonts: {
@@ -24,7 +25,8 @@ const theme = {
     md: 16,
     lg: 24,
     xl: 32,
-    xxl: 48
+    xxl: 48,
+    xxxl: 64
   }
 }
 
