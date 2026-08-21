@@ -21,7 +21,7 @@ const SignInForm = ({ onSubmit }) => {
     onSubmit,
     validationSchema
   })
-  console.log(formik.values, formik.errors)
+
   return (
     <View style={styles.container}>
       <InputWithError

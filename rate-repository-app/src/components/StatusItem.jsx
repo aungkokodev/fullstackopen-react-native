@@ -1,18 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import theme from '../theme'
-
-const styles = StyleSheet.create({
-  container: {
-    gap: theme.sizes.xs,
-    alignItems: 'center'
-  },
-  counts: {
-    fontWeight: 'bold'
-  },
-  name: {
-    color: theme.textColors.secondary
-  }
-})
+import Text from './Text'
 
 const StatusItem = ({ name, counts }) => {
   const shortenCounts =
@@ -27,3 +15,16 @@ const StatusItem = ({ name, counts }) => {
 }
 
 export default StatusItem
+
+const styles = StyleSheet.create({
+  container: {
+    gap: theme.sizes.xs,
+    alignItems: 'center'
+  },
+  counts: {
+    fontWeight: 'bold'
+  },
+  name: {
+    color: theme.text.secondary
+  }
+})

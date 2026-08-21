@@ -1,16 +1,6 @@
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import theme from '../theme'
-
-const styles = StyleSheet.create({
-  button: {
-    padding: theme.sizes.sm,
-    backgroundColor: theme.colors.primary,
-    textAlign: 'center',
-    color: theme.textColors.inverse,
-    borderRadius: theme.sizes.xs,
-    fontWeight: 'bold'
-  }
-})
+import Text from './Text'
 
 const Button = ({ text, onPress }) => {
   return (
@@ -21,3 +11,14 @@ const Button = ({ text, onPress }) => {
 }
 
 export default Button
+
+const styles = StyleSheet.create({
+  button: {
+    padding: theme.sizes.sm,
+    backgroundColor: theme.colors.primary,
+    textAlign: 'center',
+    color: theme.text.inverse,
+    borderRadius: theme.sizes.xs,
+    fontWeight: 'bold'
+  }
+})

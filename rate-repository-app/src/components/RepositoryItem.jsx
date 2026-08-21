@@ -1,6 +1,30 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import theme from '../theme'
 import StatusItem from './StatusItem'
+import Text from './Text'
+
+const RepositoryItem = ({ item }) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.infoContainer}>
+        <Image src={item.ownerAvatarUrl} style={styles.avatar} />
+        <View style={styles.infoSubContainer}>
+          <Text style={styles.repoName}>{item.fullName}</Text>
+          <Text style={styles.repoDesc}>{item.description}</Text>
+          <Text style={styles.repoLang}>{item.language}</Text>
+        </View>
+      </View>
+      <View style={styles.statusContainer}>
+        <StatusItem counts={item.stargazersCount} name={'Stars'} />
+        <StatusItem counts={item.forksCount} name={'Forks'} />
+        <StatusItem counts={item.reviewCount} name={'Reviews'} />
+        <StatusItem counts={item.ratingAverage} name={'Rating'} />
+      </View>
+    </View>
+  )
+}
+
+export default RepositoryItem
 
 const styles = StyleSheet.create({
   container: {
@@ -25,11 +49,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   repoDesc: {
-    color: theme.textColors.secondary,
+    color: theme.text.secondary,
     marginVertical: theme.sizes.xs
   },
   repoLang: {
-    color: theme.textColors.inverse,
+    color: theme.text.inverse,
     backgroundColor: theme.colors.primary,
     padding: theme.sizes.xs,
     borderRadius: theme.sizes.xxs
@@ -39,26 +63,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   }
 })
-
-const RepositoryItem = ({ item }) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.infoContainer}>
-        <Image src={item.ownerAvatarUrl} style={styles.avatar} />
-        <View style={styles.infoSubContainer}>
-          <Text style={styles.repoName}>{item.fullName}</Text>
-          <Text style={styles.repoDesc}>{item.description}</Text>
-          <Text style={styles.repoLang}>{item.language}</Text>
-        </View>
-      </View>
-      <View style={styles.statusContainer}>
-        <StatusItem counts={item.stargazersCount} name={'Stars'} />
-        <StatusItem counts={item.forksCount} name={'Forks'} />
-        <StatusItem counts={item.reviewCount} name={'Reviews'} />
-        <StatusItem counts={item.ratingAverage} name={'Rating'} />
-      </View>
-    </View>
-  )
-}
-
-export default RepositoryItem

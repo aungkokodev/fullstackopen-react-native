@@ -1,16 +1,16 @@
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import theme from '../theme'
-
-const styles = StyleSheet.create({
-  text: {
-    color: theme.textColors.inverse,
-    fontWeight: 'bold',
-    marginRight: theme.sizes.md
-  }
-})
+import Text from './Text'
 
 const AppBarTab = ({ text }) => {
   return <Text style={styles.text}>{text}</Text>
 }
 
 export default AppBarTab
+
+const styles = StyleSheet.create({
+  text: {
+    fontWeight: 'bold',
+    color: theme.text.inverse
+  }
+})

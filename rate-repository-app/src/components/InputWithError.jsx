@@ -1,5 +1,6 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import theme from '../theme'
+import Text from './Text'
 
 const InputWithError = ({ touched, error, ...props }) => {
   const inputStyle = [styles.input, error && styles.border]
@@ -16,7 +17,7 @@ export default InputWithError
 
 const styles = StyleSheet.create({
   input: {
-    color: theme.textColors.secondary,
+    color: theme.text.secondary,
     padding: theme.sizes.sm,
     borderRadius: theme.sizes.xs,
     borderWidth: 2,

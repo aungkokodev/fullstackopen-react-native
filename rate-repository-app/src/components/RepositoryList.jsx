@@ -49,6 +49,21 @@ const repositories = [
   }
 ]
 
+const ItemSeparator = () => <View style={styles.separator} />
+
+const RepositoryList = () => {
+  return (
+    <FlatList
+      data={repositories}
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={({ item }) => <RepositoryItem item={item} />}
+      style={styles.container}
+    />
+  )
+}
+
+export default RepositoryList
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.backgrounds.main
@@ -57,19 +72,3 @@ const styles = StyleSheet.create({
     height: theme.sizes.md
   }
 })
-
-const ItemSeparator = () => <View style={styles.separator} />
-
-const RepositoryList = () => {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={repositories}
-        ItemSeparatorComponent={ItemSeparator}
-        renderItem={({ item }) => <RepositoryItem item={item} />}
-      />
-    </View>
-  )
-}
-
-export default RepositoryList
