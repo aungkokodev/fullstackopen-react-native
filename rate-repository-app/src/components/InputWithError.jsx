@@ -3,7 +3,7 @@ import theme from '../theme'
 import Text from './Text'
 
 const InputWithError = ({ touched, error, ...props }) => {
-  const inputStyle = [styles.input, error && styles.border]
+  const inputStyle = [styles.input, touched && error && styles.border]
 
   return (
     <View>
