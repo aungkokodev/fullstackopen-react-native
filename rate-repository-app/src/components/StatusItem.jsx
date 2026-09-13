@@ -2,13 +2,15 @@ import { StyleSheet, View } from 'react-native'
 import theme from '../theme'
 import Text from './Text'
 
-const StatusItem = ({ name, counts }) => {
+const StatusItem = ({ name, counts, testID }) => {
   const shortenCounts =
     counts < 1000 ? counts : `${(Number(counts) / 1000).toFixed(1)}k`
 
   return (
     <View style={styles.container}>
-      <Text style={styles.counts}>{shortenCounts}</Text>
+      <Text style={styles.counts} testID={testID}>
+        {shortenCounts}
+      </Text>
       <Text style={styles.name}>{name}</Text>
     </View>
   )

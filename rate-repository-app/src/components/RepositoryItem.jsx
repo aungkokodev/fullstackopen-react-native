@@ -5,20 +5,42 @@ import Text from './Text'
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID='repositoryItem'>
       <View style={styles.infoContainer}>
         <Image src={item.ownerAvatarUrl} style={styles.avatar} />
         <View style={styles.infoSubContainer}>
-          <Text style={styles.repoName}>{item.fullName}</Text>
-          <Text style={styles.repoDesc}>{item.description}</Text>
-          <Text style={styles.repoLang}>{item.language}</Text>
+          <Text style={styles.repoName} testID='fullName'>
+            {item.fullName}
+          </Text>
+          <Text style={styles.repoDesc} testID='description'>
+            {item.description}
+          </Text>
+          <Text style={styles.repoLang} testID='language'>
+            {item.language}
+          </Text>
         </View>
       </View>
       <View style={styles.statusContainer}>
-        <StatusItem counts={item.stargazersCount} name={'Stars'} />
-        <StatusItem counts={item.forksCount} name={'Forks'} />
-        <StatusItem counts={item.reviewCount} name={'Reviews'} />
-        <StatusItem counts={item.ratingAverage} name={'Rating'} />
+        <StatusItem
+          counts={item.stargazersCount}
+          name={'Stars'}
+          testID='stargazersCount'
+        />
+        <StatusItem
+          counts={item.forksCount}
+          name={'Forks'}
+          testID='forksCount'
+        />
+        <StatusItem
+          counts={item.reviewCount}
+          name={'Reviews'}
+          testID='reviewCount'
+        />
+        <StatusItem
+          counts={item.ratingAverage}
+          name={'Rating'}
+          testID='ratingAverage'
+        />
       </View>
     </View>
   )
