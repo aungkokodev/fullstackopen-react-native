@@ -1,9 +1,13 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, Linking, Pressable, StyleSheet, View } from 'react-native'
 import theme from '../theme'
 import StatusItem from './StatusItem'
 import Text from './Text'
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showBtn }) => {
+  const handlePress = () => {
+    Linking.openURL(item.url)
+  }
+
   return (
     <View style={styles.container} testID='repositoryItem'>
       <View style={styles.infoContainer}>
@@ -42,6 +46,11 @@ const RepositoryItem = ({ item }) => {
           testID='ratingAverage'
         />
       </View>
+      {showBtn && (
+        <Pressable onPress={handlePress}>
+          <Text style={styles.button}>Open in GitHub</Text>
+        </Pressable>
+      )}
     </View>
   )
 }
@@ -83,5 +92,13 @@ const styles = StyleSheet.create({
   statusContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around'
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    borderRadius: theme.sizes.xs,
+    color: theme.text.inverse,
+    padding: theme.sizes.sm,
+    textAlign: 'center',
+    fontWeight: 'bold'
   }
 })

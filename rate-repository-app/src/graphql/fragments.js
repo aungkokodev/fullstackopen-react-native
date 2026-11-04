@@ -11,6 +11,7 @@ const RepositoryFileds = gql`
     forksCount
     reviewCount
     ratingAverage
+    url
   }
 `
 

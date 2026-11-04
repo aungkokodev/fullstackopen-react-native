@@ -51,6 +51,7 @@ export default SignInForm
 const styles = StyleSheet.create({
   container: {
     padding: theme.sizes.md,
-    gap: theme.sizes.md
+    gap: theme.sizes.md,
+    backgroundColor: theme.backgrounds.primary
   }
 })
