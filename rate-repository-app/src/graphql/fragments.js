@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-const RepositoryFileds = gql`
+export const RepositoryFileds = gql`
   fragment RepositoryFileds on Repository {
     id
     ownerAvatarUrl
@@ -15,4 +15,31 @@ const RepositoryFileds = gql`
   }
 `
 
-export { RepositoryFileds }
+export const Review = gql`
+  fragment Review on Review {
+    id
+    text
+    rating
+    createdAt
+    user {
+      id
+      username
+    }
+  }
+`
+
+export const RepositoryWithReviews = gql`
+  fragment RepositoryWithReviews on Repository {
+    ...RepositoryFileds
+    reviews {
+      edges {
+        node {
+          ...Review
+        }
+      }
+    }
+  }
+
+  ${RepositoryFileds}
+  ${Review}
+`
