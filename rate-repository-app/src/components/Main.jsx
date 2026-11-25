@@ -6,6 +6,7 @@ import RepositoryList from './RepositoryList'
 import ReviewForm from './ReviewForm'
 import SignIn from './SignIn'
 import SingleRepository from './SingleRepository'
+import SignUp from './SingUp'
 
 const Main = () => {
   return (
@@ -16,6 +17,7 @@ const Main = () => {
         <Route path={'/reviews/create'} element={<ReviewForm />} />
         <Route path={'/repositories/:id'} element={<SingleRepository />} />
         <Route path={'/signin'} element={<SignIn />} />
+        <Route path={'/signup'} element={<SignUp />} />
       </Routes>
     </View>
   )

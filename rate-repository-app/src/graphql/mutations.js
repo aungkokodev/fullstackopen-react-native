@@ -18,3 +18,23 @@ export const CREATE_REVIEW = gql`
 
   ${Review}
 `
+
+export const CREATE_USER = gql`
+  mutation ($user: CreateUserInput) {
+    createUser(user: $user) {
+      username
+      reviewCount
+      id
+      createdAt
+      reviews {
+        edges {
+          node {
+            ...Review
+          }
+        }
+      }
+    }
+  }
+
+  ${Review}
+`

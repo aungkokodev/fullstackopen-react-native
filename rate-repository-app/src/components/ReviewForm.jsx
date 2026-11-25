@@ -48,7 +48,6 @@ const ReviewForm = () => {
         })
 
         if (data) {
-          console.log(data)
           const id = data.createReview?.repositoryId
           navigate(`/repositories/${id}`)
         }
