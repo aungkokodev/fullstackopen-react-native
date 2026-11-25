@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 3,
     borderColor: theme.colors.primary,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 44,
     textAlign: 'center',
