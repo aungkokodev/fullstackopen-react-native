@@ -17,10 +17,15 @@ const AppBar = () => {
   const goToSingOut = async () => {
     await authStorage.removeAccessToken()
     await apolloClient.resetStore()
+    navigate('/')
   }
 
   const goToCreateReview = () => {
     navigate('/reviews/create')
+  }
+
+  const goToReviewList = () => {
+    navigate('/me')
   }
 
   const goToSignIn = () => {
@@ -45,6 +50,9 @@ const AppBar = () => {
           <>
             <Pressable onPress={goToCreateReview}>
               <AppBarTab text={'Create a review'} />
+            </Pressable>
+            <Pressable onPress={goToReviewList}>
+              <AppBarTab text={'My reviews'} />
             </Pressable>
             <Pressable onPress={goToSingOut}>
               <AppBarTab text={'Sign out'} />

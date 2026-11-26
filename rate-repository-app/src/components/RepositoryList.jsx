@@ -17,7 +17,7 @@ const SORT_OPTIONS = {
 const RepositoryList = () => {
   const [sort, setSort] = useState('latest')
   const [filter, setFilter] = useState('')
-  const [searchKeyword] = useDebounce(filter, 1000)
+  const [searchKeyword] = useDebounce(filter, 500)
   const { repositories } = useRepositories({
     ...SORT_OPTIONS[sort],
     searchKeyword

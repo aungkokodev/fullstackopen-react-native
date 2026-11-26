@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import theme from '../theme'
 import Text from './Text'
 
-const ReviewItem = ({ review }) => {
+const ReviewItem = ({ review, me = false }) => {
   if (!review) return null
 
   const date = format(review.createdAt, 'dd MMM yyyy')
@@ -14,7 +14,9 @@ const ReviewItem = ({ review }) => {
         <Text style={styles.rating}>{review.rating}</Text>
       </View>
       <View style={styles.info}>
-        <Text style={styles.username}>{review.user?.username}</Text>
+        <Text style={styles.username}>
+          {me ? review?.repository?.fullName : review.user?.username}
+        </Text>
         <Text style={styles.date}>{date}</Text>
         <Text style={styles.review}>{review.text}</Text>
       </View>

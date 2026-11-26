@@ -26,7 +26,12 @@ export const Review = gql`
       id
       username
     }
+    repository {
+      ...RepositoryFileds
+    }
   }
+
+  ${RepositoryFileds}
 `
 
 export const RepositoryWithReviews = gql`
