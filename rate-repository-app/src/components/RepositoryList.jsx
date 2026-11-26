@@ -1,7 +1,9 @@
 import { Picker } from '@react-native-picker/picker'
 import { useState } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
+import { Searchbar } from 'react-native-paper'
 import { useNavigate } from 'react-router-native'
+import { useDebounce } from 'use-debounce'
 import useRepositories from '../hooks/useRepositories'
 import theme from '../theme'
 import RepositoryItem from './RepositoryItem'
@@ -14,13 +16,20 @@ const SORT_OPTIONS = {
 
 const RepositoryList = () => {
   const [sort, setSort] = useState('latest')
-  const { repositories } = useRepositories(SORT_OPTIONS[sort])
+  const [filter, setFilter] = useState('')
+  const [searchKeyword] = useDebounce(filter, 1000)
+  const { repositories } = useRepositories({
+    ...SORT_OPTIONS[sort],
+    searchKeyword
+  })
 
   return (
     <RepositoryListContainer
       repositories={repositories}
       sort={sort}
       setSort={setSort}
+      filter={filter}
+      setFilter={setFilter}
     />
   )
 }
@@ -29,8 +38,14 @@ export default RepositoryList
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-const SortComponent = ({ sort, setSort }) => (
-  <View style={styles.sortContainer}>
+const ListHeader = ({ sort, setSort, filter, setFilter }) => (
+  <View style={styles.listHeader}>
+    <Searchbar
+      value={filter}
+      onChangeText={setFilter}
+      placeholder={'Search...'}
+      style={styles.searchBar}
+    />
     <Picker selectedValue={sort} onValueChange={setSort}>
       <Picker.Item label='Latest repositories' value={'latest'} />
       <Picker.Item label='Highest rated repositories' value={'highest'} />
@@ -39,7 +54,13 @@ const SortComponent = ({ sort, setSort }) => (
   </View>
 )
 
-export const RepositoryListContainer = ({ repositories, sort, setSort }) => {
+export const RepositoryListContainer = ({
+  repositories,
+  sort,
+  setSort,
+  filter,
+  setFilter
+}) => {
   const navigate = useNavigate()
 
   const repositoryNodes =
@@ -49,7 +70,14 @@ export const RepositoryListContainer = ({ repositories, sort, setSort }) => {
     <FlatList
       data={repositoryNodes}
       keyExtractor={item => item.id}
-      ListHeaderComponent={<SortComponent sort={sort} setSort={setSort} />}
+      ListHeaderComponent={
+        <ListHeader
+          sort={sort}
+          setSort={setSort}
+          filter={filter}
+          setFilter={setFilter}
+        />
+      }
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => (
         <Pressable onPress={() => navigate(`/repositories/${item.id}`)}>
@@ -68,7 +96,11 @@ const styles = StyleSheet.create({
   separator: {
     height: theme.sizes.md
   },
-  sortContainer: {
+  listHeader: {
     paddingHorizontal: theme.sizes.md
+  },
+  searchBar: {
+    backgroundColor: theme.backgrounds.primary,
+    marginTop: theme.sizes.md
   }
 })
