@@ -12,7 +12,7 @@ const ReviewList = () => {
     }
   })
 
-  if (loading || !data) return null
+  if (loading && !data) return null
 
   const reviews = data.me?.reviews?.edges?.map(e => e.node)
 

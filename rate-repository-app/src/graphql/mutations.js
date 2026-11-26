@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { Review } from './fragments'
+import { ReviewFields, UserFields } from './fragments'
 
 export const SING_IN = gql`
   mutation ($credentials: AuthenticateInput!) {
@@ -12,31 +12,33 @@ export const SING_IN = gql`
 export const CREATE_REVIEW = gql`
   mutation ($review: CreateReviewInput) {
     createReview(review: $review) {
-      ...Review
+      ...ReviewFields
+      user {
+        ...UserFields
+      }
     }
   }
 
-  ${Review}
+  ${ReviewFields}
+  ${UserFields}
 `
 
 export const CREATE_USER = gql`
   mutation ($user: CreateUserInput) {
     createUser(user: $user) {
-      username
-      reviewCount
-      id
-      createdAt
+      ...UserFields
       reviews {
         edges {
           node {
-            ...Review
+            ...ReviewFields
           }
         }
       }
     }
   }
 
-  ${Review}
+  ${UserFields}
+  ${ReviewFields}
 `
 
 export const DELETE_REVIEW = gql`

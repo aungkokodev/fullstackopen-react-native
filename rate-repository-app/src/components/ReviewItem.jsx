@@ -1,11 +1,11 @@
+import { useMutation } from '@apollo/client/react'
 import { format } from 'date-fns'
 import { Alert, StyleSheet, View } from 'react-native'
 import { useNavigate } from 'react-router-native'
+import { DELETE_REVIEW } from '../graphql/mutations'
 import theme from '../theme'
 import Button from './Button'
 import Text from './Text'
-import { useMutation } from '@apollo/client/react'
-import { DELETE_REVIEW } from '../graphql/mutations'
 
 const ReviewItem = ({ review, me = false, refetch }) => {
   const [mutate] = useMutation(DELETE_REVIEW)

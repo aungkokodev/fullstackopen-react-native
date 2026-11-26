@@ -1,9 +1,9 @@
-import { StyleSheet, View } from 'react-native'
-import InputWithError from './InputWithError'
-import theme from '../theme'
 import { useFormik } from 'formik'
+import { StyleSheet, View } from 'react-native'
 import * as yup from 'yup'
+import theme from '../theme'
 import Button from './Button'
+import InputWithError from './InputWithError'
 
 const initialValues = {
   username: '',
@@ -46,6 +46,7 @@ const SingUpForm = ({ onSubmit }) => {
         error={formik.errors.username}
       />
       <InputWithError
+        secureTextEntry
         value={formik.values.password}
         onChangeText={formik.handleChange('password')}
         onBlur={formik.handleBlur('password')}
@@ -54,6 +55,7 @@ const SingUpForm = ({ onSubmit }) => {
         error={formik.errors.password}
       />
       <InputWithError
+        secureTextEntry
         value={formik.values.passwordConfirm}
         onChangeText={formik.handleChange('passwordConfirm')}
         onBlur={formik.handleBlur('passwordConfirm')}

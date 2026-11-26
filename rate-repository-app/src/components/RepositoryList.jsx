@@ -18,14 +18,18 @@ const RepositoryList = () => {
   const [sort, setSort] = useState('latest')
   const [filter, setFilter] = useState('')
   const [searchKeyword] = useDebounce(filter, 500)
-  const { repositories } = useRepositories({
+  const { repositories, loading, fetchMore } = useRepositories({
     ...SORT_OPTIONS[sort],
-    searchKeyword
+    searchKeyword,
+    first: 5
   })
+
+  if (loading && !repositories) return null
 
   return (
     <RepositoryListContainer
       repositories={repositories}
+      onEndReached={fetchMore}
       sort={sort}
       setSort={setSort}
       filter={filter}
@@ -56,6 +60,7 @@ const ListHeader = ({ sort, setSort, filter, setFilter }) => (
 
 export const RepositoryListContainer = ({
   repositories,
+  onEndReached,
   sort,
   setSort,
   filter,
@@ -70,6 +75,11 @@ export const RepositoryListContainer = ({
     <FlatList
       data={repositoryNodes}
       keyExtractor={item => item.id}
+      renderItem={({ item }) => (
+        <Pressable onPress={() => navigate(`/repositories/${item.id}`)}>
+          <RepositoryItem item={item} />
+        </Pressable>
+      )}
       ListHeaderComponent={
         <ListHeader
           sort={sort}
@@ -79,12 +89,9 @@ export const RepositoryListContainer = ({
         />
       }
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => (
-        <Pressable onPress={() => navigate(`/repositories/${item.id}`)}>
-          <RepositoryItem item={item} />
-        </Pressable>
-      )}
       style={styles.container}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0}
     />
   )
 }

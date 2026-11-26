@@ -1,52 +1,85 @@
 import { gql } from '@apollo/client'
-import { RepositoryFileds, RepositoryWithReviews, Review } from './fragments'
+import {
+  PageInfo,
+  RepositoryFields,
+  ReviewFields,
+  UserFields
+} from './fragments'
 
 export const GET_REPOSITORIES = gql`
   query (
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
     $searchKeyword: String
+    $first: Int
+    $after: String
   ) {
     repositories(
       orderBy: $orderBy
       orderDirection: $orderDirection
       searchKeyword: $searchKeyword
+      first: $first
+      after: $after
     ) {
       edges {
         node {
-          ...RepositoryFileds
+          ...RepositoryFields
         }
+      }
+      pageInfo {
+        ...PageInfo
       }
     }
   }
 
-  ${RepositoryFileds}
+  ${RepositoryFields}
+  ${PageInfo}
 `
 
 export const ME = gql`
   query ($includeReviews: Boolean = false) {
     me {
-      id
-      username
+      ...UserFields
       reviews @include(if: $includeReviews) {
         edges {
           node {
-            ...Review
+            ...ReviewFields
+            repository {
+              ...RepositoryFields
+            }
           }
         }
       }
     }
   }
 
-  ${Review}
+  ${UserFields}
+  ${ReviewFields}
+  ${RepositoryFields}
 `
 
 export const GET_REPOSITORY = gql`
-  query ($id: ID!) {
+  query ($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
-      ...RepositoryWithReviews
+      ...RepositoryFields
+      reviews(first: $first, after: $after) {
+        edges {
+          node {
+            ...ReviewFields
+            user {
+              ...UserFields
+            }
+          }
+        }
+        pageInfo {
+          ...PageInfo
+        }
+      }
     }
   }
 
-  ${RepositoryWithReviews}
+  ${RepositoryFields}
+  ${ReviewFields}
+  ${UserFields}
+  ${PageInfo}
 `

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const RepositoryFileds = gql`
-  fragment RepositoryFileds on Repository {
+export const RepositoryFields = gql`
+  fragment RepositoryFields on Repository {
     id
     ownerAvatarUrl
     fullName
@@ -15,37 +15,28 @@ export const RepositoryFileds = gql`
   }
 `
 
-export const Review = gql`
-  fragment Review on Review {
+export const ReviewFields = gql`
+  fragment ReviewFields on Review {
     id
     text
     rating
     createdAt
     repositoryId
-    user {
-      id
-      username
-    }
-    repository {
-      ...RepositoryFileds
-    }
   }
-
-  ${RepositoryFileds}
 `
 
-export const RepositoryWithReviews = gql`
-  fragment RepositoryWithReviews on Repository {
-    ...RepositoryFileds
-    reviews {
-      edges {
-        node {
-          ...Review
-        }
-      }
-    }
+export const UserFields = gql`
+  fragment UserFields on User {
+    username
+    reviewCount
+    id
+    createdAt
   }
+`
 
-  ${RepositoryFileds}
-  ${Review}
+export const PageInfo = gql`
+  fragment PageInfo on PageInfo {
+    endCursor
+    hasNextPage
+  }
 `
