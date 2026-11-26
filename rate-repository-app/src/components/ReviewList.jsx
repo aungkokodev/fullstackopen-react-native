@@ -5,7 +5,8 @@ import theme from '../theme'
 import ReviewItem from './ReviewItem'
 
 const ReviewList = () => {
-  const { data, loading } = useQuery(ME, {
+  const { data, loading, refetch } = useQuery(ME, {
+    fetchPolicy: 'cache-and-network',
     variables: {
       includeReviews: true
     }
@@ -19,7 +20,9 @@ const ReviewList = () => {
     <FlatList
       data={reviews}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => <ReviewItem review={item} me={true} />}
+      renderItem={({ item }) => (
+        <ReviewItem review={item} me={true} refetch={refetch} />
+      )}
       ItemSeparatorComponent={<Separator />}
     />
   )
